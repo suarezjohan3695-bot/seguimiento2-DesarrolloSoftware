@@ -10,20 +10,26 @@ package Modelos;
  */
 public class Libro {
     
+    public  enum Categoria {Literatura, Ciencia, Historia, Tecnologia};
+    public enum Estado {Disponible, Prestado, Retirado};
+    
     private String codigoLibro;
     private String Titulo;
     private String autor;
     private String editorial;
     private int anioPublicacion;
-    public  enum Categoria {Literatura, Ciencia, Historia, Tecnologia};
-    public enum Estado {Disponible, Prestado, Retirado};
+    
+    private Estado estado;
+    private Categoria categoria;
 
-    public Libro(String codigoLibro, String Titulo, String autor, String editoria, int anioPublicacion) {
+    public Libro(String codigoLibro, String Titulo, String autor, String editorial, int anioPublicacion, Estado estado, Categoria categoria) {
         this.codigoLibro = codigoLibro;
         this.Titulo = Titulo;
         this.autor = autor;
-        this.editorial = editoria;
+        this.editorial = editorial;
         this.anioPublicacion = anioPublicacion;
+        this.estado = estado;
+        this.categoria = categoria;
     }
 
     public String getCodigoLibro() {
@@ -50,12 +56,12 @@ public class Libro {
         this.autor = autor;
     }
 
-    public String getEditoria() {
+    public String getEditorial() {
         return editorial;
     }
 
-    public void setEditoria(String editoria) {
-        this.editorial = editoria;
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
     }
 
     public int getAnioPublicacion() {
@@ -65,6 +71,26 @@ public class Libro {
     public void setAnioPublicacion(int anioPublicacion) {
         this.anioPublicacion = anioPublicacion;
     }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+    
+    
+
+    
     
     
 }
