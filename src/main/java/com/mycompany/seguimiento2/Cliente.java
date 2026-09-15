@@ -71,7 +71,7 @@ public class Cliente {
     }
 
 
-    public void informacionCliente (){
-
+    public void mostrarInformacion (){
+    
     }
 }

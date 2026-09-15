@@ -1,12 +1,14 @@
 package com.mycompany.seguimiento2;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GestorCliente {
-    private Arraylist<Cliente> clientes;
+
+    private ArrayList<Cliente> clientes;
 
 
     public void controladorCliente() {
-        this.clientes = new Arraylist<Cliente>();
+        this.clientes = new ArrayList<Cliente>();
     }
 
 
@@ -19,12 +21,12 @@ public class GestorCliente {
         return null;
     }
 
-    public boolean registrarCliente(int idCliente, String nombreC, String telefono, String direccion, boolean tieneLibro) {
-        if (buscarCliente(idCliente) != null) {
+    public boolean registrarCliente(Cliente aux) {
+        if (buscarCliente(aux.getIdCliente()) != null) {
             System.out.println("Ya existe un cliente registrado con ese documento.");
             return false;
         }
-        Cliente nuevoCliente = new Cliente(idCliente, nombreC, telefono, direccion, tieneLibro);
+        Cliente nuevoCliente = new Cliente(aux.getIdCliente(), aux.getNombreC(), aux.getTelefono(), aux.getDireccion(), aux.isTieneLibro());
         clientes.add(nuevoCliente);
         System.out.println("Cliente registrado exitosamente.");
         return true;
@@ -40,10 +42,6 @@ public class GestorCliente {
             c.mostrarInformacion();
             System.out.println("------------------------------");
         }
-    }
-
-    public boolean existeCliente(int idCliente) {
-        return buscarCliente(idCliente) != null;
     }
 
     public boolean puedeRecibirPrestamo(int idCliente) {
