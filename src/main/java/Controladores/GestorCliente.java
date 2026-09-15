@@ -1,4 +1,6 @@
-package com.mycompany.seguimiento2;
+package Controladores;
+import Modelos.Cliente;
+
 import java.util.ArrayList;
 import java.util.List;
 
