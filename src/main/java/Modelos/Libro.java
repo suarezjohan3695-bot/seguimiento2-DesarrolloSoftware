@@ -13,7 +13,7 @@ public class Libro {
     public  enum Categoria {Literatura, Ciencia, Historia, Tecnologia};
     public enum Estado {Disponible, Prestado, Retirado};
     
-    private String codigoLibro;
+    private int codigoLibro;
     private String Titulo;
     private String autor;
     private String editorial;
@@ -22,7 +22,7 @@ public class Libro {
     private Estado estado;
     private Categoria categoria;
 
-    public Libro(String codigoLibro, String Titulo, String autor, String editorial, int anioPublicacion, Estado estado, Categoria categoria) {
+    public Libro(int codigoLibro, String Titulo, String autor, String editorial, int anioPublicacion, Estado estado, Categoria categoria) {
         this.codigoLibro = codigoLibro;
         this.Titulo = Titulo;
         this.autor = autor;
@@ -31,12 +31,17 @@ public class Libro {
         this.estado = estado;
         this.categoria = categoria;
     }
+    
+    public Estado cambiarEstadoLibro(Cliente cliente){
+        return Estado.Disponible;
+        //METODO PROVISIONAL - falta por terminar logica
+    }
 
-    public String getCodigoLibro() {
+    public int getCodigoLibro() {
         return codigoLibro;
     }
 
-    public void setCodigoLibro(String codigoLibro) {
+    public void setCodigoLibro(int codigoLibro) {
         this.codigoLibro = codigoLibro;
     }
 
