@@ -1,3 +1,5 @@
+package com.mycompany.seguimiento2;
+
 public class Cliente {
     private int idCliente;
     private String nombreC;
@@ -5,7 +7,12 @@ public class Cliente {
     private String direccion;
     private boolean tieneLibro;
 
-    public Cliente() {
+    public Cliente(int idCliente, String nombreC, String telefono, String direccion, boolean tieneLibro) {
+        this.idCliente = idCliente;
+        this.nombreC = nombreC;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.tieneLibro = tieneLibro;
     }
 
     public String getDireccion() {
