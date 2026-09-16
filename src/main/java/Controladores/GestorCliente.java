@@ -9,14 +9,14 @@ public class GestorCliente {
     private ArrayList<Cliente> clientes;
 
 
-    public void controladorCliente() {
+    public GestorCliente() {
         this.clientes = new ArrayList<Cliente>();
     }
 
 
     public Cliente buscarCliente(int documento) {
         for (Cliente aux : clientes) {
-            if (aux.getIdCliente() == (documento)) {
+            if (aux.getIdCliente() == documento) {
                 return aux;
             }
         }
@@ -28,7 +28,7 @@ public class GestorCliente {
             System.out.println("Ya existe un cliente registrado con ese documento.");
             return false;
         }
-        Cliente nuevoCliente = new Cliente(aux.getIdCliente(), aux.getNombreC(), aux.getTelefono(), aux.getDireccion(), aux.isTieneLibro());
+        Cliente nuevoCliente = new Cliente(aux.getIdCliente(), aux.getNombreC(), aux.getTelefono(), aux.getDireccion());
         clientes.add(nuevoCliente);
         System.out.println("Cliente registrado exitosamente.");
         return true;
@@ -41,9 +41,10 @@ public class GestorCliente {
         }
         System.out.println("----- Lista de Clientes -----");
         for (Cliente c : clientes) {
-            c.mostrarInformacion();
+
             System.out.println("------------------------------");
         }
+
     }
 
     public boolean puedeRecibirPrestamo(int idCliente) {
@@ -57,6 +58,17 @@ public class GestorCliente {
             return false;
         }
         return true;
+    }
+
+    public void mostrarInformacion (int idCliente){
+        Cliente cliente = buscarCliente(idCliente);
+        if (cliente != null){
+            System.out.println("Documento:" + cliente.getIdCliente());
+            System.out.println("Nombre Cliente:" + cliente.getNombreC());
+            System.out.println("Telefono:" + cliente.getTelefono());
+            System.out.println("Direccion:" +cliente.getDireccion());
+            System.out.println("¿Tiene libro?" + (cliente.isTieneLibro()? "Si" : "No"));
+        }
     }
 
     public List<Cliente> getClientes() {

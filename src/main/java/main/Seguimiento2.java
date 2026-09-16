@@ -13,7 +13,11 @@ import java.util.Scanner;
  * @author morde
  */
 public class Seguimiento2 {
+    private static GestorCliente gC;
     public static void main(String[] args) {
+
+       gC = new GestorCliente();
+
         int opcion;
         do {
             mostrarMenu();
@@ -31,16 +35,12 @@ public class Seguimiento2 {
 
     private static void mostrarMenu() {
         System.out.println(""" 
-        ===== MENÚ PRINCIPAL - Biblioteca LibrosYMas =====
-        --- Gestión de Libros ---
-        1. Registrar libro
-        2. Listar libros
+        ===== MENÚ PRINCIPAL -  ====
        --- Gestión de Clientes ---
-        3. Registrar cliente
-        5. Mostrar información de un cliente
-        --- Préstamos y Devoluciones ---
-        6. Registrar préstamo
-        7. Registrar devolución
+        1. Registrar cliente
+        2. Buscar cliente
+        3. Mosgtrar Información de un Cliente
+        4. Listar Lista de Clientes
         0. Salir
         Seleccione una opción: 
         """);
@@ -57,29 +57,18 @@ public class Seguimiento2 {
     }
 
     private static void procesarOpcion(int opcion) {
-        int opcionS = scanner.nextInt();
-        switch (opcionS) {
+
+        switch (opcion) {
             case 1:
-
-
-
-                break;              // Johan
+                agregarCliente();
+                break;
             case 2:
                 System.out.println("ola");;
-                break;    // Johan
+                break;
             case 3:
                 System.out.println("ola");
                 break;
             case 4:
-                System.out.println("ola");
-                break;
-            case 5:
-                System.out.println("ola");
-                break;
-            case 6:
-                System.out.println("ola");
-                break;
-            case 7:
                 System.out.println("ola");
                 break;
             case 0:
@@ -91,6 +80,22 @@ public class Seguimiento2 {
     }
 
     public static void agregarCliente () {
+        System.out.println("Ingrese el ID");
+        int id = scanner.nextInt();
+
+        System.out.println("Nombre:");
+        String nombre = scanner.next();
+
+        System.out.println("Telefono:");
+        String telefono = scanner.next();
+
+        System.out.println("Dirección:");
+        String direccion = scanner.next();
+
+        Cliente nuevoCliente = new Cliente(id, nombre, telefono, direccion);
+        gestorClientes.registrarCliente(nuevoCliente);
+        gestorClientes.mostrarInformacion(id);
+
 
     }
 }

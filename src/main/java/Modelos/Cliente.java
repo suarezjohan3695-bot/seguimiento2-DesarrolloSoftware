@@ -7,12 +7,11 @@ public class Cliente {
     private String direccion;
     private boolean tieneLibro;
 
-    public Cliente(int idCliente, String nombreC, String telefono, String direccion, boolean tieneLibro) {
+    public Cliente(int idCliente, String nombreC, String telefono, String direccion) {
         this.idCliente = idCliente;
         this.nombreC = nombreC;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.tieneLibro = tieneLibro;
     }
 
     public String getDireccion() {
@@ -71,11 +70,4 @@ public class Cliente {
     }
 
 
-    public void mostrarInformacion (){
-        System.out.println("Documento:" + idCliente);
-        System.out.println("Nombre Cliente:" + nombreC);
-        System.out.println("Telefono:" + telefono);
-        System.out.println("Direccion:" + direccion);
-        System.out.println("¿Tiene libro?" + ((tieneLibro) ? "Si" : "No"));
-    } 
 }
