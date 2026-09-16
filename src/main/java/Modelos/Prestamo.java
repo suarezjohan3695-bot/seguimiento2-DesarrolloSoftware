@@ -40,6 +40,7 @@ public class Prestamo {
     public void registrarDevolucion(Cliente cliente, Libro libro){
         if(cliente.getLibroPrestado().getCodigoLibro() == libro.getCodigoLibro()){
             cliente.setTieneLibro(false);
+            cliente.setLibroPrestado(null);
             libro.setEstado(Libro.Estado.Disponible);
             System.out.println("Libro devuelto con exito");
         }

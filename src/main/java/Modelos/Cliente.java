@@ -27,11 +27,7 @@ public class Cliente {
         System.out.println("¿Tiene libro?" + ((tieneLibro) ? "Si" : "No"));
     }
 
-    public void DeterminarLibroPrestado() {
-        if (!tieneLibro ) {
-            libroPrestado = null;
-        }
-    }
+    
 
     public String getDireccion() {
         return direccion;
