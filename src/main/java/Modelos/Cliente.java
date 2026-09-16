@@ -17,16 +17,6 @@ public class Cliente {
 
     }
 
-   
-
-    public void mostrarInformacion() {
-        System.out.println("Documento:" + idCliente);
-        System.out.println("Nombre Cliente:" + nombreC);
-        System.out.println("Telefono:" + telefono);
-        System.out.println("Direccion:" + direccion);
-        System.out.println("¿Tiene libro?" + ((tieneLibro) ? "Si" : "No"));
-    }
-
     
 
     public String getDireccion() {

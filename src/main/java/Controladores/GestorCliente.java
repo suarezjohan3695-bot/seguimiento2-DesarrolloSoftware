@@ -9,14 +9,13 @@ public class GestorCliente {
     private ArrayList<Cliente> clientes;
 
 
-    public void controladorCliente() {
+    public GestorCliente() {
         this.clientes = new ArrayList<Cliente>();
     }
 
-
     public Cliente buscarCliente(int documento) {
         for (Cliente aux : clientes) {
-            if (aux.getIdCliente() == (documento)) {
+            if (aux.getIdCliente() == documento) {
                 return aux;
             }
         }
@@ -41,22 +40,21 @@ public class GestorCliente {
         }
         System.out.println("----- Lista de Clientes -----");
         for (Cliente c : clientes) {
-            c.mostrarInformacion();
+            mostrarInformacion(c.getIdCliente());
             System.out.println("------------------------------");
         }
+
     }
 
-    public boolean puedeRecibirPrestamo(int idCliente) {
+    public void mostrarInformacion (int idCliente){
         Cliente cliente = buscarCliente(idCliente);
-        if (cliente == null) {
-            System.out.println("El cliente no está registrado en el sistema.");
-            return false;
+        if (cliente != null){
+            System.out.println("Documento:" + cliente.getIdCliente());
+            System.out.println("Nombre Cliente:" + cliente.getNombreC());
+            System.out.println("Telefono:" + cliente.getTelefono());
+            System.out.println("Direccion:" +cliente.getDireccion());
+            System.out.println("¿Tiene libro?" + (cliente.isTieneLibro()? "Si" : "No"));
         }
-        if (cliente.isTieneLibro()) {
-            System.out.println("El cliente ya tiene un libro prestado.");
-            return false;
-        }
-        return true;
     }
 
     public List<Cliente> getClientes() {
