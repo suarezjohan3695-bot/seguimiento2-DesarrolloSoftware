@@ -9,16 +9,21 @@ package Modelos;
  * @author morde
  */
 public class Libro {
-    
-    public  enum Categoria {Literatura, Ciencia, Historia, Tecnologia};
-    public enum Estado {Disponible, Prestado, Retirado};
-    
+
+    public enum Categoria {
+        Literatura, Ciencia, Historia, Tecnologia
+    };
+
+    public enum Estado {
+        Disponible, Prestado, Retirado
+    };
+
     private int codigoLibro;
     private String Titulo;
     private String autor;
     private String editorial;
     private int anioPublicacion;
-    
+
     private Estado estado;
     private Categoria categoria;
 
@@ -30,11 +35,6 @@ public class Libro {
         this.anioPublicacion = anioPublicacion;
         this.estado = estado;
         this.categoria = categoria;
-    }
-    
-    public Estado cambiarEstadoLibro(Cliente cliente){
-        return Estado.Disponible;
-        //METODO PROVISIONAL - falta por terminar logica
     }
 
     public int getCodigoLibro() {
@@ -92,10 +92,5 @@ public class Libro {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    
-    
 
-    
-    
-    
 }

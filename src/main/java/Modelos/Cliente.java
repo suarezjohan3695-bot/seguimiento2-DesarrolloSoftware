@@ -1,19 +1,33 @@
 package Modelos;
 
 public class Cliente {
+
     private int idCliente;
     private String nombreC;
     private String telefono;
     private String direccion;
-    private boolean tieneLibro;
+    private boolean tieneLibro = false;
+    private Libro libroPrestado = null;
 
-    public Cliente(int idCliente, String nombreC, String telefono, String direccion, boolean tieneLibro) {
+    public Cliente(int idCliente, String nombreC, String telefono, String direccion) {
         this.idCliente = idCliente;
         this.nombreC = nombreC;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.tieneLibro = tieneLibro;
+
     }
+
+   
+
+    public void mostrarInformacion() {
+        System.out.println("Documento:" + idCliente);
+        System.out.println("Nombre Cliente:" + nombreC);
+        System.out.println("Telefono:" + telefono);
+        System.out.println("Direccion:" + direccion);
+        System.out.println("¿Tiene libro?" + ((tieneLibro) ? "Si" : "No"));
+    }
+
+    
 
     public String getDireccion() {
         return direccion;
@@ -55,27 +69,12 @@ public class Cliente {
         this.tieneLibro = tieneLibro;
     }
 
-    public void marcarPrestamo(){
-        if(tieneLibro) {
-            System.out.println("El cliente ya cuenta con un libro");
-            return;
-        }
-        this.tieneLibro = true;
+    public Libro getLibroPrestado() {
+        return libroPrestado;
     }
 
-    public void registrarDevolucion(){
-        if(tieneLibro) {
-            System.out.println("El cliente no tiene libro");
-        }
-        this.tieneLibro=false;
+    public void setLibroPrestado(Libro libroPrestado) {
+        this.libroPrestado = libroPrestado;
     }
 
-
-    public void mostrarInformacion (){
-        System.out.println("Documento:" + idCliente);
-        System.out.println("Nombre Cliente:" + nombreC);
-        System.out.println("Telefono:" + telefono);
-        System.out.println("Direccion:" + direccion);
-        System.out.println("¿Tiene libro?" + ((tieneLibro) ? "Si" : "No"));
-    } 
 }

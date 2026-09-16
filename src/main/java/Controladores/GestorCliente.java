@@ -28,7 +28,7 @@ public class GestorCliente {
             System.out.println("Ya existe un cliente registrado con ese documento.");
             return false;
         }
-        Cliente nuevoCliente = new Cliente(aux.getIdCliente(), aux.getNombreC(), aux.getTelefono(), aux.getDireccion(), aux.isTieneLibro());
+        Cliente nuevoCliente = new Cliente(aux.getIdCliente(), aux.getNombreC(), aux.getTelefono(), aux.getDireccion());
         clientes.add(nuevoCliente);
         System.out.println("Cliente registrado exitosamente.");
         return true;
