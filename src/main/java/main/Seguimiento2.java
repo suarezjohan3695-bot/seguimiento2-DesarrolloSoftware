@@ -13,38 +13,32 @@ import java.util.Scanner;
  * @author morde
  */
 public class Seguimiento2 {
-    private static GestorCliente gC;
+    private static Scanner scanner = new Scanner(System.in);
+    private static GestorCliente gestorClientes = new GestorCliente();
+
     public static void main(String[] args) {
-
-       gC = new GestorCliente();
-
         int opcion;
         do {
             mostrarMenu();
             opcion = leerOpcion();
             procesarOpcion(opcion);
-        } while (opcion == 0);
+        } while (opcion != 0);
 
         System.out.println("Saliendo del sistema. ¡Hasta luego!");
         scanner.close();
     }
 
-    private static Scanner scanner = new Scanner(System.in);
-    private static GestorCliente gestorClientes = new GestorCliente();
-
-
     private static void mostrarMenu() {
         System.out.println(""" 
-        ===== MENÚ PRINCIPAL -  ====
-       --- Gestión de Clientes ---
+        ===== MENÚ PRINCIPAL ====
+        --- Gestión de Clientes ---
         1. Registrar cliente
         2. Buscar cliente
-        3. Mosgtrar Información de un Cliente
+        3. Mostrar Información de un Cliente
         4. Listar Lista de Clientes
         0. Salir
         Seleccione una opción: 
         """);
-
     }
 
     private static int leerOpcion() {
@@ -57,45 +51,58 @@ public class Seguimiento2 {
     }
 
     private static void procesarOpcion(int opcion) {
-
         switch (opcion) {
             case 1:
                 agregarCliente();
                 break;
             case 2:
-                System.out.println("ola");;
+                buscarClienteMenu();
                 break;
             case 3:
-                System.out.println("ola");
+                mostrarInfoCliente();
                 break;
             case 4:
-                System.out.println("ola");
+                gestorClientes.listarClientes();
                 break;
             case 0:
                 break;
             default:
                 System.out.println("Opción no válida. Intente de nuevo.");
         }
-
     }
 
-    public static void agregarCliente () {
-        System.out.println("Ingrese el ID");
+    public static void agregarCliente() {
+        System.out.println("Ingrese el ID:");
         int id = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Nombre:");
-        String nombre = scanner.next();
+        String nombre = scanner.nextLine();
 
-        System.out.println("Telefono:");
-        String telefono = scanner.next();
+        System.out.println("Teléfono:");
+        String telefono = scanner.nextLine();
 
         System.out.println("Dirección:");
-        String direccion = scanner.next();
+        String direccion = scanner.nextLine();
 
         Cliente nuevoCliente = new Cliente(id, nombre, telefono, direccion);
         gestorClientes.registrarCliente(nuevoCliente);
+
+    }
+
+    public static void buscarClienteMenu() {
+        System.out.println("Ingrese el ID que quiere buscar:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
         gestorClientes.mostrarInformacion(id);
+    }
 
+    public static void mostrarInfoCliente() {
+        System.out.println("Ingrese el ID del cliente:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
 
+        gestorClientes.mostrarInformacion(id);
     }
 }
