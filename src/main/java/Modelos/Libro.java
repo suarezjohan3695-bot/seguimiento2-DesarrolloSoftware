@@ -33,6 +33,8 @@ public class Libro {
     }
     
     public Estado cambiarEstadoLibro(Cliente cliente){
+        
+        
         return Estado.Disponible;
         //METODO PROVISIONAL - falta por terminar logica
     }
