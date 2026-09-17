@@ -61,7 +61,6 @@ public class Seguimiento2 {
     }
 
 
-
     }
 
     private static int leerOpcion() {
