@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controladores;
+package Gestores;
 
 import Modelos.Libro;
 
@@ -12,16 +12,21 @@ import java.util.ArrayList;
  *
  * @author morde
  */
-public class Inventario {
+public class GestorLibros {
 
     ArrayList<Libro> libros;
 
-    public Inventario() {
+    public GestorLibros() {
         libros = new ArrayList<Libro>();
     }
 
     @Override
     public String toString() {
+
+        if (libros == null || libros.isEmpty()) {
+            return "SIN LIBROS";
+
+        }
         StringBuilder infoLibro = new StringBuilder();
         for (Libro lb : libros) {
             //Informacion completa del libro en formato de texto 
@@ -33,42 +38,49 @@ public class Inventario {
             infoLibro.append("Categoria: ").append(lb.getCategoria()).append("\n");
             infoLibro.append("Estado: ").append(lb.getEstado()).append("\n");
         }
+
         return infoLibro.toString();
 
     }
 
     // CRUD Libros
     public void registrarLibro(Libro aux) {
-        
+
         Libro libro = buscarLibro(aux.getCodigoLibro());
-        
-            if (libro.getCodigoLibro() == aux.getCodigoLibro()) {
-                System.out.println("Libro ya existente, no se puede registrar");
-            } else {
-                Libro nuevo = new Libro(aux.getCodigoLibro(), aux.getTitulo(),
-                        aux.getAutor(), aux.getEditorial(),
-                        aux.getAnioPublicacion(), aux.getEstado(), aux.getCategoria());
 
-                libros.add(nuevo);
+        if (libro != null) {
+            System.out.println("LIBRO CON CODIGO: " + aux.getCodigoLibro() + " YA EXISTE");
+            System.out.println("");
 
-                System.out.println("Libro nuevo registrado con exito");
-            }
+        } else {
+            Libro nuevo = new Libro(aux.getCodigoLibro(), aux.getTitulo(),
+                    aux.getAutor(), aux.getEditorial(),
+                    aux.getAnioPublicacion(), aux.getCategoria());
+
+            libros.add(nuevo);
+            System.out.println("LIBRO NUEVO CON CODIGO: " + nuevo.getCodigoLibro() + " REGISTRADO");
+            System.out.println("");
+
         }
-    
+    }
 
     public Libro buscarLibro(int codigo) {
         for (Libro lb : libros) {
             if (codigo == lb.getCodigoLibro()) {
-                System.out.println("Estado: " + lb.getEstado());
+                System.out.println(toString());
                 return lb;
             }
         }
         return null;
     }
 
-    public String listadoLibrosDisponibles() {
+    public void listadoLibrosDisponibles() {
 
-        String listaDisponible = null;
+        String listaDisponible = "Sin libros disponibles";
+
+        if (libros == null || libros.isEmpty()) {
+            System.out.println("Ningun libro registrado");
+        }
         for (Libro lb : libros) {
             if (lb.getEstado().equals(Libro.Estado.Disponible)) {
                 listaDisponible = "Titulo: " + lb.getTitulo() + "\n";
@@ -76,17 +88,20 @@ public class Inventario {
 
             }
         }
-        return listaDisponible;
+
+        System.out.println(listaDisponible);
+        System.out.println("");
     }
 
-    public void eliminarLibro(Libro libro) {
-        Libro lb = buscarLibro(libro.getCodigoLibro());
+    public void eliminarLibro(int codigo, String razon) {
+        Libro lb = buscarLibro(codigo);
 
         if (lb == null) {
             System.out.println("Este libro no existe en el sistema");
         }
-        libros.remove(lb);
-        System.out.println("Este libro ha sido eliminado del sistema por decision del admin.");
+        lb.setEstado(Libro.Estado.Retirado);
+        
+        System.out.println("Este libro ha sido retirado del sistema por " + razon);
 
     }
 }
