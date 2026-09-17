@@ -20,9 +20,8 @@ public class Seguimiento2 {
         int opcion;
         do {
             mostrarMenu();
-            opcion = leerOpcion();
-            procesarOpcion(opcion);
-        } while (opcion != 0);
+
+        } while (!scanner.hasNextInt());
 
         System.out.println("Saliendo del sistema. ¡Hasta luego!");
         scanner.close();
@@ -30,47 +29,40 @@ public class Seguimiento2 {
 
     private static void mostrarMenu() {
         System.out.println(""" 
-        ===== MENÚ PRINCIPAL ====
-        --- Gestión de Clientes ---
-        1. Registrar cliente
-        2. Buscar cliente
-        3. Mostrar Información de un Cliente
-        4. Listar Lista de Clientes
-        0. Salir
-        Seleccione una opción: 
-        """);
+                ===== MENÚ PRINCIPAL ====
+                --- Gestión de Clientes ---
+                1. Registrar cliente
+                2. Buscar cliente
+                3. Mostrar Información de un Cliente
+                4. Listar Lista de Clientes
+                0. Salir
+                Seleccione una opción: 
+                """);
+        int opcion = scanner.nextInt();
+
+
+    switch (opcion) {
+        case 1:
+            agregarCliente();
+            break;
+        case 2:
+            buscarClienteMenu();
+            break;
+        case 3:
+            mostrarInfoCliente();
+            break;
+        case 4:
+            gestorClientes.listarClientes();
+            break;
+        case 0:
+            break;
+        default:
+            System.out.println("Opción no válida. Intente de nuevo.");
     }
 
-    private static int leerOpcion() {
-        try {
-            return Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            System.out.println("Entrada inválida. Intente de nuevo.");
-            return -1;
-        }
-    }
 
-    private static void procesarOpcion(int opcion) {
-        switch (opcion) {
-            case 1:
-                agregarCliente();
-                break;
-            case 2:
-                buscarClienteMenu();
-                break;
-            case 3:
-                mostrarInfoCliente();
-                break;
-            case 4:
-                gestorClientes.listarClientes();
-                break;
-            case 0:
-                break;
-            default:
-                System.out.println("Opción no válida. Intente de nuevo.");
-        }
     }
-
+    
     public static void agregarCliente() {
         System.out.println("Ingrese el ID:");
         int id = scanner.nextInt();
@@ -87,6 +79,23 @@ public class Seguimiento2 {
 
         Cliente nuevoCliente = new Cliente(id, nombre, telefono, direccion);
         gestorClientes.registrarCliente(nuevoCliente);
+        do {
+            System.out.println("""
+                    
+                    """);
+            System.out.println("""
+                    1. Volver al menu
+                    2. Menu Libros
+                    
+                    """);
+            if (scanner.nextInt() == 1) {
+                mostrarMenu();
+            } else if (scanner.nextInt() == 2) {
+                System.out.println("FALTA AQUI");
+            } else {
+                System.out.println("Ingresa un valor valido");
+            }
+        }while(scanner.nextInt() != 1 || scanner.nextInt() != 2);
 
     }
 
@@ -96,6 +105,23 @@ public class Seguimiento2 {
         scanner.nextLine();
 
         gestorClientes.mostrarInformacion(id);
+        do {
+            System.out.println("""
+                    
+                    """);
+            System.out.println("""
+                    1. Volver al menu
+                    2. Menu Libros
+                    
+                    """);
+            if (scanner.nextInt() == 1) {
+                mostrarMenu();
+            } else if (scanner.nextInt() == 2) {
+                System.out.println("FALTA AQUI");
+            } else {
+                System.out.println("Ingresa un valor valido");
+            }
+        }while(scanner.nextInt() != 1 || scanner.nextInt() != 2);
     }
 
     public static void mostrarInfoCliente() {
@@ -104,5 +130,22 @@ public class Seguimiento2 {
         scanner.nextLine();
 
         gestorClientes.mostrarInformacion(id);
+        do {
+            System.out.println("""
+                    
+                    """);
+            System.out.println("""
+                    1. Volver al menu
+                    2. Menu Libros
+                    
+                    """);
+            if (scanner.nextInt() == 1) {
+                mostrarMenu();
+            } else if (scanner.nextInt() == 2) {
+                System.out.println("FALTA AQUI");
+            } else {
+                System.out.println("Ingresa un valor valido");
+            }
+        }while(scanner.nextInt() != 1 || scanner.nextInt() != 2);
     }
 }
