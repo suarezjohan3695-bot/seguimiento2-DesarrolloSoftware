@@ -29,7 +29,7 @@ public class Seguimiento2 {
         gestorLibros = new GestorLibros();
 
         do {
-            mostrarMenuLibros();
+            mostrarMenuPrincipal();
 
         } while (!scanner.hasNextInt());
 
