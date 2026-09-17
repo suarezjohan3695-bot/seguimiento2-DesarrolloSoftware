@@ -62,17 +62,7 @@ public class Seguimiento2 {
 
 
     }
-
-    private static int leerOpcion() {
-        try {
-            return Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            System.out.println("Entrada inválida. Intente de nuevo.");
-            return -1;
-        }
-    }
-
-
+    
     public static void agregarCliente() {
         System.out.println("Ingrese el ID:");
         int id = scanner.nextInt();
