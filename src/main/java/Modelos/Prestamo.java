@@ -5,45 +5,57 @@
 package Modelos;
 
 import Gestores.GestorLibros;
+import java.time.LocalDate;
 
 /**
  *
  * @author morde
  */
-public class Prestamo {
+  
 
-    private Cliente cliente;
-    private Libro libro;
+    public class Prestamo {
 
-    public Prestamo(Cliente cliente, Libro libro) {
-        this.cliente = cliente;
-        this.libro = libro;
-    }
+        private Cliente cliente;
+        private Libro libro;
+        private LocalDate fecha = LocalDate.now();
 
-    public void registrarPrestamo(Cliente cliente, Libro libro) {
-        if (!cliente.isTieneLibro() && libro.getEstado().equals(Libro.Estado.Disponible)) {
-
-            System.out.println("El cliente con id: " + cliente.getIdCliente()
-                    + "Tiene prestado el libro con codigo " + libro.getCodigoLibro());
-
-            cliente.setTieneLibro(true);
-            cliente.setLibroPrestado(libro);
-            libro.setEstado(Libro.Estado.Prestado);
-        } else if (cliente.isTieneLibro()) {
-            System.out.println("El cliente solo puede tener un libro prestado");
-
-        } else{
-            System.out.println("Este libro no esta disponible para prestar");
+        public Prestamo(Cliente cliente, Libro libro) {
+            this.cliente = cliente;
+            this.libro = libro;
         }
-    }
-    
-    public void registrarDevolucion(Cliente cliente, Libro libro){
-        if(cliente.getLibroPrestado().getCodigoLibro() == libro.getCodigoLibro()){
+
+        public void registrarPrestamo(Cliente cliente, Libro libro) {
+            if (!cliente.isTieneLibro() && libro.getEstado().equals(Libro.Estado.Disponible)) {
+
+                System.out.println("El cliente con id: " + cliente.getIdCliente()
+                        + ", tiene prestado el libro con codigo " + libro.getCodigoLibro() + ", con fecha: "
+                + fecha);
+
+                cliente.setTieneLibro(true);
+                cliente.setLibroPrestado(libro);
+                libro.setEstado(Libro.Estado.Prestado);
+            } else if (cliente.isTieneLibro()) {
+                System.out.println("El cliente solo puede tener un libro prestado");
+
+            } else {
+                System.out.println("Este libro no esta disponible para prestar");
+            }
+        }
+
+        public void registrarDevolucion(Cliente cliente, Libro libro) {
+            
+            if (libro.getEstado().equals(Libro.Estado.Disponible)) {
+                System.out.println("Este libro no esta prestado");
+            }
+            if (cliente.getLibroPrestado().getCodigoLibro() != libro.getCodigoLibro()) {
+                System.out.println("Este libro no lo tiene el cliente");
+            }
+
             cliente.setTieneLibro(false);
             cliente.setLibroPrestado(null);
             libro.setEstado(Libro.Estado.Disponible);
             System.out.println("Libro devuelto con exito");
-        }
+        
     }
 
     public Cliente getCliente() {

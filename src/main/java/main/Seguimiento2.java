@@ -8,6 +8,7 @@ import Gestores.GestorLibros;
 import Modelos.Cliente;
 import Modelos.Libro;
 import Modelos.Libro.Categoria;
+import Modelos.Prestamo;
 
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class Seguimiento2 {
     private static Scanner scanner = new Scanner(System.in);
     private static GestorCliente gestorClientes;
     private static GestorLibros gestorLibros;
+    private static Prestamo prestamo;
 
     public static void main(String[] args) {
 
@@ -27,7 +29,7 @@ public class Seguimiento2 {
         gestorLibros = new GestorLibros();
 
         do {
-            menuLibros();
+            mostrarMenuLibros();
 
         } while (!scanner.hasNextInt());
 
@@ -35,8 +37,37 @@ public class Seguimiento2 {
         scanner.close();
     }
 
+    public static void mostrarMenuPrincipal() {
+        do {
+            System.out.println("""
+                           --- MENU PRINCIPAL ---
+                           
+                           1. Menu gestion clientes
+                           2. Menu gestion libros
+                           3. Menu de prestamos y devoluciones
+                           
+                           """);
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    mostrarMenuCliente();
+                    break;
+                case 2:
+                    mostrarMenuLibros();
+                    break;
+                case 3:
+                    mostrarMenuPrestamo();
+                    break;
+                default:
+                    System.out.println("Opcion invalida. ");
+            }
+
+        } while (!scanner.hasNextInt());
+    }
+
     public static void mostrarMenuCliente() {
-        System.out.println(""" 
+        do {
+            System.out.println(""" 
                
                 --- Gestión de Clientes ---
                            
@@ -49,26 +80,59 @@ public class Seguimiento2 {
                 Seleccione una opción: 
                            
                 """);
-        int opcion = scanner.nextInt();
+            int opcion = scanner.nextInt();
 
-        switch (opcion) {
-            case 1:
-                agregarCliente();
-                break;
-            case 2:
-                buscarClienteMenu();
-                break;
-            case 3:
-                mostrarInfoCliente();
-                break;
-            case 4:
-                gestorClientes.listarClientes();
-                break;
-            case 0:
-                break;
-            default:
-                System.out.println("Opción no válida. Intente de nuevo.");
-        }
+            switch (opcion) {
+                case 1:
+                    agregarCliente();
+                    break;
+                case 2:
+                    buscarClienteMenu();
+                    break;
+                case 3:
+                    mostrarInfoCliente();
+                    break;
+                case 4:
+                    gestorClientes.listarClientes();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    scanner.next();
+                    break;
+            }
+        } while (!scanner.hasNextInt());
+
+    }
+
+    public static void mostrarDiferentesMenus() {
+        do {
+
+            System.out.println("""
+                    1. Menu Clientes
+                    2. Menu Libros
+                    3. Menu Prestamo                                     
+                               """);
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    mostrarMenuCliente();
+                    break;
+                case 2:
+                    mostrarMenuLibros();
+                    break;
+                case 3:
+                    mostrarMenuPrestamo();
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
+                    scanner.next();
+                    break;
+
+            }
+        } while (!scanner.hasNextInt());
 
     }
 
@@ -88,23 +152,9 @@ public class Seguimiento2 {
 
         Cliente nuevoCliente = new Cliente(id, nombre, telefono, direccion);
         gestorClientes.registrarCliente(nuevoCliente);
-        do {
-            System.out.println("""
-                    
-                    """);
-            System.out.println("""
-                    1. Volver al menu
-                    2. Menu Libros
-                    
-                    """);
-            if (scanner.nextInt() == 1) {
-                mostrarMenuCliente();
-            } else if (scanner.nextInt() == 2) {
-                menuLibros();
-            } else {
-                System.out.println("Ingresa un valor valido");
-            }
-        } while (scanner.nextInt() != 1 || scanner.nextInt() != 2);
+        System.out.println("");
+
+        mostrarDiferentesMenus();
 
     }
 
@@ -114,23 +164,7 @@ public class Seguimiento2 {
         scanner.nextLine();
 
         gestorClientes.mostrarInformacion(id);
-        do {
-            System.out.println("""
-                    
-                    """);
-            System.out.println("""
-                    1. Volver al menu
-                    2. Menu Libros
-                    
-                    """);
-            if (scanner.nextInt() == 1) {
-                mostrarMenuCliente();
-            } else if (scanner.nextInt() == 2) {
-                menuLibros();
-            } else {
-                System.out.println("Ingresa un valor valido");
-            }
-        } while (scanner.nextInt() != 1 || scanner.nextInt() != 2);
+        mostrarDiferentesMenus();
     }
 
     public static void mostrarInfoCliente() {
@@ -139,27 +173,10 @@ public class Seguimiento2 {
         scanner.nextLine();
 
         gestorClientes.mostrarInformacion(id);
-        do {
-            System.out.println("""
-                    
-                    """);
-            System.out.println("""
-                              
-                    1. Volver al menu
-                    2. Menu Libros
-                    
-                    """);
-            if (scanner.nextInt() == 1) {
-                mostrarMenuCliente();
-            } else if (scanner.nextInt() == 2) {
-                menuLibros();
-            } else {
-                System.out.println("Ingresa un valor valido");
-            }
-        } while (scanner.nextInt() != 1 || scanner.nextInt() != 2);
+        mostrarDiferentesMenus();
     }
 
-    public static void menuLibros() {
+    public static void mostrarMenuLibros() {
 
         do {
             System.out.println("""
@@ -174,51 +191,53 @@ public class Seguimiento2 {
                                
                                """);
 
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    registrarLibro();
+                    break;
+
+                case 2:
+                    gestorLibros.listadoLibrosDisponibles();
+                    mostrarMenuPregunta();
+                    break;
+
+                case 3:
+                    System.out.println(gestorLibros.toString());
+                    mostrarMenuPregunta();
+                    break;
+
+                case 4:
+                    System.out.println("Ingresa el codigo del libro a buscar: ");
+                    int id = scanner.nextInt();
+                    gestorLibros.buscarLibro(id);
+                    mostrarMenuPregunta();
+                    break;
+
+                case 5:
+                    System.out.println("Ingresa el codigo del libro: ");
+                    int codigo = scanner.nextInt();
+                    scanner.next();
+                    System.out.println("Explique brevemente la razon del porque se retira del sistema: ");
+                    String razon = scanner.nextLine();
+                    gestorLibros.eliminarLibro(codigo, razon);
+                    mostrarMenuPregunta();
+                default:
+                    System.out.println("Opcion invalidad");
+                    scanner.next();
+
+            }
         } while (!scanner.hasNextInt());
-
-        int opcion = scanner.nextInt();
-
-        switch (opcion) {
-            case 1:
-                registrarLibro();
-                break;
-
-            case 2:
-                gestorLibros.listadoLibrosDisponibles();
-                menuPregunta();
-                break;
-
-            case 3:
-                System.out.println(gestorLibros.toString());
-                menuPregunta();
-                break;
-
-            case 4:
-                System.out.println("Ingresa el codigo del libro a buscar: ");
-                int id = scanner.nextInt();
-                gestorLibros.buscarLibro(id);
-                menuPregunta();
-                break;
-
-            case 5:
-                System.out.println("Ingresa el codigo del libro: ");
-                int codigo = scanner.nextInt();
-                scanner.next();
-                System.out.println("Explique brevemente la razon del porque se retira del sistema: ");
-                String razon = scanner.nextLine();
-                gestorLibros.eliminarLibro(codigo, razon);
-                menuPregunta();
-
-        }
     }
 
-    public static void menuPregunta() {
+    public static void mostrarMenuPregunta() {
         do {
             System.out.println("""
                                Que quieres hacer? 
                                
                                1. Menu Clientes
-                               2. Volver menu
+                               2. Volver menu libros
                                3. Realizar un prestamo
                                4. Salir
                                
@@ -230,16 +249,18 @@ public class Seguimiento2 {
                     mostrarMenuCliente();
                     break;
                 case 2:
-                    menuLibros();
+                    mostrarMenuLibros();
                     break;
                 case 3:
-                    System.out.println("falta aqui");
+                    mostrarMenuPrestamo();
                     break;
                 case 4:
                     scanner.close();
+                    break;
                 default:
                     System.out.println("Opcion invalida. Ingresa un valor del 1 al 3");
                     scanner.next();
+                    break;
 
             }
         } while (!scanner.hasNextInt());
@@ -295,8 +316,135 @@ public class Seguimiento2 {
 
         gestorLibros.registrarLibro(libroAux);
 
-        menuPregunta();
+        mostrarMenuPregunta();
 
     }
 
+    public static void mostrarMenuPrestamo() {
+        System.out.println("""
+                           ---Prestamos y Devoluciones---
+                           
+                           1. Realizar prestamo libro
+                           2. Realizar devolucion libro
+                           3. menu principal
+                           4. Salir
+                           """);
+
+        int opcion = scanner.nextInt();
+        switch (opcion) {
+            case 1:
+                realizarPrestamo();
+                break;
+            case 2:
+                registrarDevolucion();
+                break;
+            case 3:
+                mostrarMenuPrincipal();
+                break;
+            case 4:
+                scanner.close();
+                break;
+            default:
+                System.out.println("Opcion Invalida");
+                scanner.next();
+                break;
+
+        }
+    }
+
+    private static void realizarPrestamo() {
+        System.out.println("Ingrese el id del cliente: ");
+        int id = scanner.nextInt();
+        scanner.next();
+        System.out.println("Ingrese el codigo del libro: ");
+        int codigo = scanner.nextInt();
+
+        Cliente cliente = gestorClientes.buscarCliente(id);
+        Libro libro = gestorLibros.buscarLibro(codigo);
+
+        if (cliente == null) {
+            System.out.println("Este cliente no se encuentra registrado en el sistema");
+            System.out.println("""
+                               1. registrar cliente
+                               2. Realizar nuevo prestamo
+                               """);
+            int opc = scanner.nextInt();
+            if (opc == 1) {
+                agregarCliente();
+            } else if (opc == 2) {
+                realizarPrestamo();
+            } else {
+                mostrarMenuPrestamo();
+            }
+
+        }
+        if (libro == null) {
+            System.out.println("Libro no registrado: ");
+            System.out.println("""
+                               1. registrar libro
+                               2. Realizar nuevo prestamo
+                               """);
+            int opc = scanner.nextInt();
+            if (opc == 1) {
+                registrarLibro();
+            } else if (opc == 2) {
+                realizarPrestamo();
+            } else {
+                mostrarMenuPrestamo();
+            }
+
+        }
+
+        prestamo.registrarPrestamo(cliente, libro);
+        System.out.println("");
+        mostrarDiferentesMenus();
+    }
+
+    public static void registrarDevolucion() {
+        System.out.println("Ingrese el id del cliente: ");
+        int id = scanner.nextInt();
+        scanner.next();
+        System.out.println("Ingrese el codigo del libro en el sistema: ");
+        int codigo = scanner.nextInt();
+
+        Cliente cliente = gestorClientes.buscarCliente(id);
+        Libro libro = gestorLibros.buscarLibro(codigo);
+
+        if (cliente == null) {
+            System.out.println("Este cliente no se encuentra registrado en el sistema");
+            System.out.println("""
+                               1. registrar cliente
+                               2. Realizar nuevo prestamo
+                               """);
+            int opc = scanner.nextInt();
+            if (opc == 1) {
+                agregarCliente();
+            } else if (opc == 2) {
+                realizarPrestamo();
+            } else {
+                mostrarMenuPrestamo();
+            }
+
+        }
+        if (libro == null) {
+            System.out.println("Libro no registrado en el sistema: ");
+            System.out.println("""
+                               1. registrar libro
+                               2. Realizar nuevo prestamo
+                               """);
+            int opc = scanner.nextInt();
+            if (opc == 1) {
+                registrarLibro();
+            } else if (opc == 2) {
+                realizarPrestamo();
+            } else {
+                mostrarMenuPrestamo();
+            }
+
+        }
+        prestamo.registrarDevolucion(cliente, libro);
+        System.out.println("");
+        mostrarDiferentesMenus();
+
+    }
 }
