@@ -1,10 +1,13 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package main;
+
 import Controladores.GestorCliente;
+import Controladores.GestorLibros;
 import Modelos.Cliente;
+import Modelos.Libro;
+import Modelos.Libro.Categoria;
 
 import java.util.Scanner;
 
@@ -13,13 +16,18 @@ import java.util.Scanner;
  * @author morde
  */
 public class Seguimiento2 {
+
     private static Scanner scanner = new Scanner(System.in);
-    private static GestorCliente gestorClientes = new GestorCliente();
+    private static GestorCliente gestorClientes;
+    private static GestorLibros gestorLibros;
 
     public static void main(String[] args) {
-        int opcion;
+
+        gestorClientes = new GestorCliente();
+        gestorLibros = new GestorLibros();
+
         do {
-            mostrarMenu();
+            menuLibros();
 
         } while (!scanner.hasNextInt());
 
@@ -27,42 +35,43 @@ public class Seguimiento2 {
         scanner.close();
     }
 
-    private static void mostrarMenu() {
+    public static void mostrarMenuCliente() {
         System.out.println(""" 
-                ===== MENÚ PRINCIPAL ====
+               
                 --- Gestión de Clientes ---
+                           
                 1. Registrar cliente
                 2. Buscar cliente
                 3. Mostrar Información de un Cliente
                 4. Listar Lista de Clientes
                 0. Salir
+                           
                 Seleccione una opción: 
+                           
                 """);
         int opcion = scanner.nextInt();
 
-
-    switch (opcion) {
-        case 1:
-            agregarCliente();
-            break;
-        case 2:
-            buscarClienteMenu();
-            break;
-        case 3:
-            mostrarInfoCliente();
-            break;
-        case 4:
-            gestorClientes.listarClientes();
-            break;
-        case 0:
-            break;
-        default:
-            System.out.println("Opción no válida. Intente de nuevo.");
-    }
-
+        switch (opcion) {
+            case 1:
+                agregarCliente();
+                break;
+            case 2:
+                buscarClienteMenu();
+                break;
+            case 3:
+                mostrarInfoCliente();
+                break;
+            case 4:
+                gestorClientes.listarClientes();
+                break;
+            case 0:
+                break;
+            default:
+                System.out.println("Opción no válida. Intente de nuevo.");
+        }
 
     }
-    
+
     public static void agregarCliente() {
         System.out.println("Ingrese el ID:");
         int id = scanner.nextInt();
@@ -89,18 +98,18 @@ public class Seguimiento2 {
                     
                     """);
             if (scanner.nextInt() == 1) {
-                mostrarMenu();
+                mostrarMenuCliente();
             } else if (scanner.nextInt() == 2) {
                 System.out.println("FALTA AQUI");
             } else {
                 System.out.println("Ingresa un valor valido");
             }
-        }while(scanner.nextInt() != 1 || scanner.nextInt() != 2);
+        } while (scanner.nextInt() != 1 || scanner.nextInt() != 2);
 
     }
 
     public static void buscarClienteMenu() {
-        System.out.println("Ingrese el ID que quiere buscar:");
+        System.out.println("Ingrese el ID que quiere buscar: ");
         int id = scanner.nextInt();
         scanner.nextLine();
 
@@ -115,13 +124,13 @@ public class Seguimiento2 {
                     
                     """);
             if (scanner.nextInt() == 1) {
-                mostrarMenu();
+                mostrarMenuCliente();
             } else if (scanner.nextInt() == 2) {
                 System.out.println("FALTA AQUI");
             } else {
                 System.out.println("Ingresa un valor valido");
             }
-        }while(scanner.nextInt() != 1 || scanner.nextInt() != 2);
+        } while (scanner.nextInt() != 1 || scanner.nextInt() != 2);
     }
 
     public static void mostrarInfoCliente() {
@@ -135,17 +144,142 @@ public class Seguimiento2 {
                     
                     """);
             System.out.println("""
+                              
                     1. Volver al menu
                     2. Menu Libros
                     
                     """);
             if (scanner.nextInt() == 1) {
-                mostrarMenu();
+                mostrarMenuCliente();
             } else if (scanner.nextInt() == 2) {
                 System.out.println("FALTA AQUI");
             } else {
                 System.out.println("Ingresa un valor valido");
             }
-        }while(scanner.nextInt() != 1 || scanner.nextInt() != 2);
+        } while (scanner.nextInt() != 1 || scanner.nextInt() != 2);
     }
-}
+
+    public static void menuLibros() {
+
+        do {
+            System.out.println("""
+                               --- Gestion de libros ---
+                               
+                               1. Registrar un libro nuevo.
+                               2. Ver libros disponibles
+                               3. Ver todos los libros
+                               4. Buscar libro
+                               5. Eliminar libro
+                               
+                               
+                               """);
+
+        } while (!scanner.hasNextInt());
+
+        int opcion = scanner.nextInt();
+
+        switch (opcion) {
+            case 1:
+                registrarLibro();
+                break;
+            case 2:
+                gestorLibros.listadoLibrosDisponibles();
+                menuPregunta();
+                break;
+            case 3:
+                System.out.println(gestorLibros.toString());
+                menuPregunta();
+                        
+                break;
+        }
+    }
+
+    public static void menuPregunta() {
+        do {
+            System.out.println("""
+                               Que quieres hacer? 
+                               
+                               1. Menu Clientes
+                               2. Volver menu
+                               3. Salir
+                               
+                               """);
+
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    mostrarMenuCliente();
+                    break;
+                case 2:
+                    menuLibros();
+                    break;
+                case 3:
+                    scanner.close();
+                    break;
+                default:
+                    System.out.println("Opcion invalida. Ingresa un valor del 1 al 3");
+                    scanner.next();
+
+            }
+        } while (!scanner.hasNextInt());
+    }
+
+    public static void registrarLibro() {
+
+        System.out.println("Ingresa el codigo del libro: ");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Ingresa el Titulo de la obra: ");
+        String titulo = scanner.nextLine();
+        System.out.println("Autor del libro: ");
+        String Autor = scanner.nextLine();
+        System.out.println("Ingresa la editorial de la obra: ");
+        String edit = scanner.nextLine();
+        System.out.println("Ingresa el año de publicacion: ");
+        int anioP = scanner.nextInt();
+        scanner.nextLine();
+        Categoria categoria = null;
+        do {
+            System.out.println("""
+                           En que categoria se encuentra el libro: 
+                           
+                           1. Literatura
+                           2. Ciencia
+                           3. Historia
+                           4. Tecnologia 
+                           
+                           """);
+            int opcionCategoria = scanner.nextInt();
+
+            switch (opcionCategoria) {
+                case 1:
+                    categoria = Categoria.Literatura;
+                    break;
+                case 2:
+                    categoria = Categoria.Ciencia;
+                    break;
+                case 3:
+                    categoria = Categoria.Historia;
+                    break;
+                case 4:
+                    categoria = Categoria.Tecnologia;
+                    break;
+                default:
+                    System.out.println("NO es una categoria valida");
+                    scanner.next();
+            }
+        } while (categoria == null);
+
+        Libro libroAux = new Libro(codigo, titulo, Autor, edit, anioP, categoria);
+
+        gestorLibros.registrarLibro(libroAux);
+        
+        menuPregunta();
+
+    }
+
+    
+        
+    }
+
+

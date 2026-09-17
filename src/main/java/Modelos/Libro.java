@@ -24,16 +24,15 @@ public class Libro {
     private String editorial;
     private int anioPublicacion;
 
-    private Estado estado;
+    private Estado estado = Estado.Disponible;
     private Categoria categoria;
 
-    public Libro(int codigoLibro, String Titulo, String autor, String editorial, int anioPublicacion, Estado estado, Categoria categoria) {
+    public Libro(int codigoLibro, String Titulo, String autor, String editorial, int anioPublicacion, Categoria categoria) {
         this.codigoLibro = codigoLibro;
         this.Titulo = Titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.anioPublicacion = anioPublicacion;
-        this.estado = estado;
         this.categoria = categoria;
     }
 
