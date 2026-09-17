@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controladores;
+package Gestores;
 
 import Modelos.Libro;
 
@@ -67,7 +67,7 @@ public class GestorLibros {
     public Libro buscarLibro(int codigo) {
         for (Libro lb : libros) {
             if (codigo == lb.getCodigoLibro()) {
-                System.out.println("Estado: " + lb.getEstado());
+                System.out.println(toString());
                 return lb;
             }
         }
@@ -93,14 +93,15 @@ public class GestorLibros {
         System.out.println("");
     }
 
-    public void eliminarLibro(Libro libro) {
-        Libro lb = buscarLibro(libro.getCodigoLibro());
+    public void eliminarLibro(int codigo, String razon) {
+        Libro lb = buscarLibro(codigo);
 
         if (lb == null) {
             System.out.println("Este libro no existe en el sistema");
         }
-        libros.remove(lb);
-        System.out.println("Este libro ha sido eliminado del sistema por decision del admin.");
+        lb.setEstado(Libro.Estado.Retirado);
+        
+        System.out.println("Este libro ha sido retirado del sistema por " + razon);
 
     }
 }

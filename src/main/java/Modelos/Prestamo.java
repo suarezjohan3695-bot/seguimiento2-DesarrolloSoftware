@@ -4,7 +4,7 @@
  */
 package Modelos;
 
-import Controladores.GestorLibros;
+import Gestores.GestorLibros;
 
 /**
  *

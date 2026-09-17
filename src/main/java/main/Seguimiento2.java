@@ -3,8 +3,8 @@
  */
 package main;
 
-import Controladores.GestorCliente;
-import Controladores.GestorLibros;
+import Gestores.GestorCliente;
+import Gestores.GestorLibros;
 import Modelos.Cliente;
 import Modelos.Libro;
 import Modelos.Libro.Categoria;
@@ -100,7 +100,7 @@ public class Seguimiento2 {
             if (scanner.nextInt() == 1) {
                 mostrarMenuCliente();
             } else if (scanner.nextInt() == 2) {
-                System.out.println("FALTA AQUI");
+                menuLibros();
             } else {
                 System.out.println("Ingresa un valor valido");
             }
@@ -126,7 +126,7 @@ public class Seguimiento2 {
             if (scanner.nextInt() == 1) {
                 mostrarMenuCliente();
             } else if (scanner.nextInt() == 2) {
-                System.out.println("FALTA AQUI");
+                menuLibros();
             } else {
                 System.out.println("Ingresa un valor valido");
             }
@@ -152,7 +152,7 @@ public class Seguimiento2 {
             if (scanner.nextInt() == 1) {
                 mostrarMenuCliente();
             } else if (scanner.nextInt() == 2) {
-                System.out.println("FALTA AQUI");
+                menuLibros();
             } else {
                 System.out.println("Ingresa un valor valido");
             }
@@ -182,15 +182,33 @@ public class Seguimiento2 {
             case 1:
                 registrarLibro();
                 break;
+
             case 2:
                 gestorLibros.listadoLibrosDisponibles();
                 menuPregunta();
                 break;
+
             case 3:
                 System.out.println(gestorLibros.toString());
                 menuPregunta();
-                        
                 break;
+
+            case 4:
+                System.out.println("Ingresa el codigo del libro a buscar: ");
+                int id = scanner.nextInt();
+                gestorLibros.buscarLibro(id);
+                menuPregunta();
+                break;
+
+            case 5:
+                System.out.println("Ingresa el codigo del libro: ");
+                int codigo = scanner.nextInt();
+                scanner.next();
+                System.out.println("Explique brevemente la razon del porque se retira del sistema: ");
+                String razon = scanner.nextLine();
+                gestorLibros.eliminarLibro(codigo, razon);
+                menuPregunta();
+
         }
     }
 
@@ -201,7 +219,8 @@ public class Seguimiento2 {
                                
                                1. Menu Clientes
                                2. Volver menu
-                               3. Salir
+                               3. Realizar un prestamo
+                               4. Salir
                                
                                """);
 
@@ -214,8 +233,10 @@ public class Seguimiento2 {
                     menuLibros();
                     break;
                 case 3:
-                    scanner.close();
+                    System.out.println("falta aqui");
                     break;
+                case 4:
+                    scanner.close();
                 default:
                     System.out.println("Opcion invalida. Ingresa un valor del 1 al 3");
                     scanner.next();
@@ -273,13 +294,9 @@ public class Seguimiento2 {
         Libro libroAux = new Libro(codigo, titulo, Autor, edit, anioP, categoria);
 
         gestorLibros.registrarLibro(libroAux);
-        
+
         menuPregunta();
 
     }
 
-    
-        
-    }
-
-
+}
