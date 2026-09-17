@@ -28,6 +28,7 @@ public class Seguimiento2 {
         gestorClientes = new GestorCliente();
         gestorLibros = new GestorLibros();
 
+
         do {
             mostrarMenuPrincipal();
 
@@ -355,7 +356,6 @@ public class Seguimiento2 {
     private static void realizarPrestamo() {
         System.out.println("Ingrese el id del cliente: ");
         int id = scanner.nextInt();
-        scanner.next();
         System.out.println("Ingrese el codigo del libro: ");
         int codigo = scanner.nextInt();
 
@@ -394,7 +394,7 @@ public class Seguimiento2 {
             }
 
         }
-
+prestamo = new Prestamo(cliente, libro);
         prestamo.registrarPrestamo(cliente, libro);
         System.out.println("");
         mostrarDiferentesMenus();
@@ -403,7 +403,6 @@ public class Seguimiento2 {
     public static void registrarDevolucion() {
         System.out.println("Ingrese el id del cliente: ");
         int id = scanner.nextInt();
-        scanner.next();
         System.out.println("Ingrese el codigo del libro en el sistema: ");
         int codigo = scanner.nextInt();
 
