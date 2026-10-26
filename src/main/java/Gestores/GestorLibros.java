@@ -7,6 +7,7 @@ package Gestores;
 import Modelos.Libro;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -43,6 +44,10 @@ public class GestorLibros {
 
     }
 
+    public List<Libro> getLibros() {
+        return libros;
+    }
+
     // CRUD Libros
     public void registrarLibro(Libro aux) {
 
@@ -60,14 +65,12 @@ public class GestorLibros {
             libros.add(nuevo);
             System.out.println("LIBRO NUEVO CON CODIGO: " + nuevo.getCodigoLibro() + " REGISTRADO");
             System.out.println("");
-
         }
     }
 
     public Libro buscarLibro(int codigo) {
         for (Libro lb : libros) {
             if (codigo == lb.getCodigoLibro()) {
-                System.out.println(toString());
                 return lb;
             }
         }
@@ -98,6 +101,16 @@ public class GestorLibros {
 
         if (lb == null) {
             System.out.println("Este libro no existe en el sistema");
+            return;
+        }
+
+        if (lb.getEstado().equals(Libro.Estado.Prestado)) {
+            System.out.println("No se puede retirar: el libro esta prestado actualmente.");
+            return;
+        }
+        if (lb.getEstado().equals(Libro.Estado.Retirado)) {
+            System.out.println("Este libro ya habia sido retirado del sistema.");
+            return;
         }
         lb.setEstado(Libro.Estado.Retirado);
         

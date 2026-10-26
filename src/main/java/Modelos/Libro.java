@@ -36,6 +36,19 @@ public class Libro {
         this.categoria = categoria;
     }
 
+    public String aLinea() {
+        return codigoLibro + ";" + Titulo + ";" + autor + ";" + editorial + ";"
+                + anioPublicacion + ";" + categoria + ";" + estado;
+    }
+
+    public static Libro desdeLinea(String linea) {
+        String[] p = linea.split(";");
+        Libro libro = new Libro(Integer.parseInt(p[0]), p[1], p[2], p[3],
+                Integer.parseInt(p[4]), Categoria.valueOf(p[5]));
+        libro.setEstado(Estado.valueOf(p[6]));
+        return libro;
+    }
+
     public int getCodigoLibro() {
         return codigoLibro;
     }

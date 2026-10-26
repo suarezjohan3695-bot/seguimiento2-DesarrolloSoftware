@@ -1,0 +1,2 @@
+45;d;dd;d;7;Ciencia;Retirado
+50;q;s;s;4;Literatura;Prestado

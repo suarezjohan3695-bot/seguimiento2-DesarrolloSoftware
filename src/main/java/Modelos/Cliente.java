@@ -1,5 +1,7 @@
 package Modelos;
 
+import Gestores.GestorLibros;
+
 public class Cliente {
 
     private int idCliente;
@@ -15,6 +17,24 @@ public class Cliente {
         this.telefono = telefono;
         this.direccion = direccion;
 
+    }
+
+    public String aLinea() {
+        String codigoLibro = (libroPrestado == null) ? "" : String.valueOf(libroPrestado.getCodigoLibro());
+        return idCliente + ";" + nombreC + ";" + telefono + ";" + direccion + ";" + codigoLibro;
+    }
+
+    public static Cliente desdeLinea(String linea, GestorLibros gl) {
+        String[] p = linea.split(";", -1);
+        Cliente cliente = new Cliente(Integer.parseInt(p[0]), p[1], p[2], p[3]);
+        if (!p[4].isEmpty()) {
+            Libro libro = gl.buscarLibro(Integer.parseInt(p[4]));
+            if (libro != null) {
+                cliente.setLibroPrestado(libro);
+                cliente.setTieneLibro(true);
+            }
+        }
+        return cliente;
     }
 
     
