@@ -12,6 +12,7 @@ import Modelos.Prestamo;
 
 import java.util.Scanner;
 import Gestores.Persistencia;
+import java.sql.SQLOutput;
 
 /**
  *
@@ -180,11 +181,14 @@ public class Seguimiento2 {
                                3. Ver todos los libros
                                4. Buscar libro
                                5. Eliminar libro
+                               6. Reservar libro
+                               
                                0. Volver
                                
                                
                                """);
             opcion = leerInt("Seleccione una opcion: ");
+            int codigo;
 
             switch (opcion) {
                 case 1:
@@ -197,8 +201,8 @@ public class Seguimiento2 {
                     System.out.println(gestorLibros.toString());
                     break;
                 case 4:
-                    int id = leerInt("Ingresa el codigo del libro a buscar: ");
-                    Libro encontrado = gestorLibros.buscarLibro(id);
+                    codigo = leerInt("Ingresa el codigo del libro a buscar: ");
+                    Libro encontrado = gestorLibros.buscarLibro(codigo);
                     if (encontrado == null) {
                         System.out.println("No existe un libro con ese codigo.");
                     } else {
@@ -206,15 +210,24 @@ public class Seguimiento2 {
                         System.out.println("Titulo: " + encontrado.getTitulo());
                         System.out.println("Autor: " + encontrado.getAutor());
                         System.out.println("Estado: " + encontrado.getEstado());
+                        System.out.println("Reservas" + encontrado.getReservas().size());  // <-- Numero de reservas en el momento 
                     }
                     break;
 
                 case 5:
-                    int codigo = leerInt("Ingresa el codigo del libro: ");
+                    codigo = leerInt("Ingresa el codigo del libro: ");
                     String razon = leerTexto("Explique brevemente la razon por la que se retira del sistema: ");
                     gestorLibros.eliminarLibro(codigo, razon);
                     persistencia.guardarLibros(gestorLibros.getLibros());   // <-- NUEVO
                     break;
+
+                case 6:
+                    int id = leerInt("Ingresa el id del cliente que reservara: ");
+                    codigo = leerInt("ingresa el codigo del libro a reservar: ");
+                    Libro reservado = gestorLibros.buscarLibro(codigo);
+                    gestorLibros.anadirReserva(reservado, id);
+                    break;
+
                 case 0:
                     break;
                 default:

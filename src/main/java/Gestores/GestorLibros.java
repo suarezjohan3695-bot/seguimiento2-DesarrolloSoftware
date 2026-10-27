@@ -121,11 +121,21 @@ public class GestorLibros {
 
     }
 
-    public void anadirReserva(Libro lb, Cliente c) {
-        if ()
-            
-    }
+    public void anadirReserva(Libro lb, int id) {
+        if (buscarLibro(lb.getCodigoLibro()) != null && 
+                lb.getEstado() == Libro.Estado.Prestado) {
+            for (Cliente aux : clientes) {
+                if (aux.getIdCliente() == id) {
+                    lb.getReservas().add(aux);
+                    System.out.println("El cliente es el numero :" + clientes.size() + " en la lista de espera");
+                } else {
+                    System.out.println("El cliente que quiere reservar no esta registrado");
+                }
+            }
 
-}
+        } else {
+            System.out.println("Este libro no esta en el sistema o fue eliminado");
+        }
+    }
 
 }

@@ -71,6 +71,11 @@ public class Prestamo {
         cliente.setTieneLibro(false);
         cliente.setLibroPrestado(null);
         libro.setEstado(Libro.Estado.Disponible);
+        if(libro.getReservas().size() > 0){
+            libro.getReservas().remove(0);
+            System.out.println("El siguiente en la lista de espera es: " + 
+                    libro.getReservas().get(0).getNombreC());
+        }
         System.out.println("Libro devuelto con exito");
         
     }
