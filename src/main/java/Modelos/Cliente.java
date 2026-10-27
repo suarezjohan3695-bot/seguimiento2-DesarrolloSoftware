@@ -8,14 +8,19 @@ public class Cliente {
     private String nombreC;
     private String telefono;
     private String direccion;
-    private boolean tieneLibro = false;
-    private Libro libroPrestado = null;
+    private boolean tieneLibro;
+    private Libro libroPrestado;
+    private double totalPendiente;
+   
 
     public Cliente(int idCliente, String nombreC, String telefono, String direccion) {
         this.idCliente = idCliente;
         this.nombreC = nombreC;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.tieneLibro = false;
+        this.libroPrestado = null;
+        this.totalPendiente = 0;
 
     }
 
@@ -37,6 +42,10 @@ public class Cliente {
         return cliente;
     }
 
+    public void acumularMulta(double monto){
+        double multaNueva = getTotalPendiente() + monto;
+        setTotalPendiente(multaNueva);
+    }
     
 
     public String getDireccion() {
@@ -87,4 +96,13 @@ public class Cliente {
         this.libroPrestado = libroPrestado;
     }
 
+    public double getTotalPendiente() {
+        return totalPendiente;
+    }
+
+    public void setTotalPendiente(double totalPendiente) {
+        this.totalPendiente = totalPendiente;
+    }
+
+    
 }

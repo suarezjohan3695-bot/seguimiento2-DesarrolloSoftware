@@ -94,7 +94,7 @@ public class Seguimiento2 {
                     System.out.println("Opcion invalida. ");
             }
 
-        } while (opcion !=0);
+        } while (opcion != 0);
     }
 
     public static void mostrarMenuCliente() {
@@ -108,6 +108,7 @@ public class Seguimiento2 {
                 2. Buscar cliente
                 3. Mostrar Información de un Cliente
                 4. Listar Lista de Clientes
+                5. Ver total pendiente x cliente
                 0. Volver
                               
                 """);
@@ -126,13 +127,14 @@ public class Seguimiento2 {
                 case 4:
                     gestorClientes.listarClientes();
                     break;
+                case 5:
+                    verTotalPendiente();
                 case 0:
                     break;
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
-        }
-        while (opcion !=0);
+        } while (opcion != 0);
 
     }
 
@@ -156,6 +158,17 @@ public class Seguimiento2 {
         gestorClientes.mostrarInformacion(id);
     }
 
+    public static void verTotalPendiente() {
+        int id = leerInt("Ingrese el ID del cliente: ");
+        Cliente c = gestorClientes.buscarCliente(id);
+        if (c == null) {
+            System.out.println("No existe un cliente con ese ID.");
+            return;
+        }
+        System.out.println("El cliente tiene un total pendiente en multas de:" + c.getTotalPendiente());
+
+    }
+
     public static void mostrarMenuLibros() {
         int opcion;
         do {
@@ -171,7 +184,7 @@ public class Seguimiento2 {
                                
                                
                                """);
-             opcion = leerInt("Seleccione una opcion: ");
+            opcion = leerInt("Seleccione una opcion: ");
 
             switch (opcion) {
                 case 1:
@@ -208,7 +221,7 @@ public class Seguimiento2 {
                     System.out.println("Opcion invalidad");
                     break;
             }
-        } while (opcion !=0);
+        } while (opcion != 0);
     }
 
     public static void registrarLibro() {
