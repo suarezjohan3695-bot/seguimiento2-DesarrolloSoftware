@@ -37,6 +37,7 @@ public class Libro {
         this.editorial = editorial;
         this.anioPublicacion = anioPublicacion;
         this.categoria = categoria;
+        this.reservas = new ArrayList<Cliente> ();
     }
 
     public String aLinea() {

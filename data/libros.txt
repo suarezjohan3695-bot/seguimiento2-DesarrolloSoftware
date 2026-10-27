@@ -1,2 +1,3 @@
 45;d;dd;d;7;Ciencia;Retirado
 50;q;s;s;4;Literatura;Prestado
+12;Cien anos de soledad;Gabriel;X;1090;Literatura;Prestado
