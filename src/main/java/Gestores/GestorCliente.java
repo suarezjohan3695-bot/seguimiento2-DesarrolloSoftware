@@ -13,9 +13,9 @@ public class GestorCliente {
         this.clientes = new ArrayList<Cliente>();
     }
 
-    public Cliente buscarCliente(int documento) {
+    public Cliente buscarCliente(int id) {
         for (Cliente aux : clientes) {
-            if (aux.getIdCliente() == documento) {
+            if (aux.getIdCliente() == id) {
                 return aux;
             }
         }
@@ -57,7 +57,7 @@ public class GestorCliente {
         }
     }
 
-    public List<Cliente> getClientes() {
+    public ArrayList<Cliente> getClientes() {
         return clientes;
     }
 

@@ -4,6 +4,7 @@
  */
 package Gestores;
 
+import Modelos.Cliente;
 import Modelos.Libro;
 
 import java.util.ArrayList;
@@ -16,9 +17,11 @@ import java.util.List;
 public class GestorLibros {
 
     ArrayList<Libro> libros;
+    ArrayList<Cliente> clientes;
 
-    public GestorLibros() {
+    public GestorLibros(ArrayList<Cliente> clientes) {
         libros = new ArrayList<Libro>();
+        this.clientes = clientes == null ? new ArrayList<Cliente>() : clientes;
     }
 
     @Override
@@ -113,8 +116,16 @@ public class GestorLibros {
             return;
         }
         lb.setEstado(Libro.Estado.Retirado);
-        
+
         System.out.println("Este libro ha sido retirado del sistema por " + razon);
 
     }
+
+    public void anadirReserva(Libro lb, Cliente c) {
+        if ()
+            
+    }
+
+}
+
 }

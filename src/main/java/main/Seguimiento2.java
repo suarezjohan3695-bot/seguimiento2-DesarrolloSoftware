@@ -27,7 +27,7 @@ public class Seguimiento2 {
     public static void main(String[] args) {
 
         gestorClientes = new GestorCliente();
-        gestorLibros = new GestorLibros();
+        gestorLibros = new GestorLibros(gestorClientes.getClientes());
 
         persistencia = new Persistencia();
         persistencia.cargarLibros(gestorLibros);

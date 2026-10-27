@@ -4,6 +4,8 @@
  */
 package Modelos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author morde
@@ -23,6 +25,7 @@ public class Libro {
     private String autor;
     private String editorial;
     private int anioPublicacion;
+    private ArrayList<Cliente> reservas;
 
     private Estado estado = Estado.Disponible;
     private Categoria categoria;
@@ -48,6 +51,7 @@ public class Libro {
         libro.setEstado(Estado.valueOf(p[6]));
         return libro;
     }
+    
 
     public int getCodigoLibro() {
         return codigoLibro;
@@ -104,5 +108,14 @@ public class Libro {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public ArrayList<Cliente> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(ArrayList<Cliente> reservas) {
+        this.reservas = reservas;
+    }
+    
 
 }
